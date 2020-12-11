@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace Reservation.API
 {
@@ -30,9 +31,9 @@ namespace Reservation.API
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefatultConnection"), 
-               b => b.MigrationsAssembly("Reservation.Data")));
+               b => b.MigrationsAssembly("Reservation.API")));
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Reservation.API", Version = "v1" });
@@ -48,6 +49,13 @@ namespace Reservation.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Reservation.API v1"));
             }
+            
+            app.UseCors(builder => {
+                builder.WithOrigins("http://localhost:4200");
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+                builder.AllowAnyOrigin();
+            });
 
             app.UseHttpsRedirection();
 

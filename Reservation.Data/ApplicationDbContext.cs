@@ -66,6 +66,6 @@ namespace Reservation.Data
         }
 
 
-        public DbSet<Contact> Users { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
     }
 }
