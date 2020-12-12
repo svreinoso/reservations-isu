@@ -15,6 +15,18 @@ code {
   border-color: #1861ac;
 }
 
-invalid-form-control{
+.invalid-form-control{
   border: 2px solid red;
 }
+
+.vertical-align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

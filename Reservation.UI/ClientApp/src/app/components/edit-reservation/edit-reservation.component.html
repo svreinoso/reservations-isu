@@ -1,0 +1,40 @@
+<div class="edit-contact">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-3">
+                <input [class]="{'invalid-form-control': name.invalid && (name.dirty || name.touched)}" 
+                    type="text" name="name" formControlName="name">
+                <div>
+                    <small *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">This field is
+                        required</small>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+                <select class="form-control form-control-md" name="contactType" formControlName="contactType">
+                    <option></option>
+                    <option *ngFor="let option of contactTypes" value="{{option.value}}">{{option.name}}</option>
+                </select>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+                <input type="text" name="phoneNumber" formControlName="phoneNumber">
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+                <input type="date" name="birthdate" formControlName="birthdate">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <ckeditor [editor]="Editor" (ready)="onEditorReady($event)" 
+                formControlName="editorData"
+                config={{editorConfig}}
+                data="<p>Hello, world!</p>"></ckeditor>
+                <div id="editor"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-right">
+                <button type="submit" class="btn btn-danger">Send</button>
+            </div>
+        </div>
+    </form>
+</div>

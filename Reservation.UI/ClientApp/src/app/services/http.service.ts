@@ -15,6 +15,17 @@ export class HttpService {
     this.baseUrl = 'https://localhost:44340/api/';
   }
 
+  formatUrl(path, options){
+    if (options) {
+      const keys = Object.keys(options);
+      if(keys.length > 0) path += '?';
+      for (let i = 0; i < keys.length; i++) {
+        path += `${keys[i]}=${options[keys[i]]}&`;
+      }
+    }
+    return path;
+  }
+
   uploadFile(url: string, model: any) {
     const options = this.addHeaders('POST');
     options.headers.delete('content-type');
@@ -24,19 +35,23 @@ export class HttpService {
   }
 
   get(url: string, options?: any) {
-    return this.http.get(this.baseUrl + url, this.addHeaders('GET', options)).pipe(catchError(err => this.handleError(err)));
+    return this.http.get(this.baseUrl + url, this.addHeaders('GET', options))
+      .pipe(catchError(err => this.handleError(err)));
   }
 
   post(url: string, model: any) {
-    return this.http.post(this.baseUrl + url, model, this.addHeaders('POST')).pipe(catchError(err => this.handleError(err)));
+    return this.http.post(this.baseUrl + url, model, this.addHeaders('POST'))
+      .pipe(catchError(err => this.handleError(err)));
   }
 
   update(url: string, model: any) {
-    return this.http.put(this.baseUrl + url, model, this.addHeaders('PUT')).pipe(catchError(err => this.handleError(err)));
+    return this.http.put(this.baseUrl + url, model, this.addHeaders('PUT'))
+      .pipe(catchError(err => this.handleError(err)));
   }
 
   delete(url: string) {
-    return this.http.delete(this.baseUrl + url, this.addHeaders('DELETE')).pipe(catchError(err => this.handleError(err)));
+    return this.http.delete(this.baseUrl + url, this.addHeaders('DELETE'))
+      .pipe(catchError(err => this.handleError(err)));
   }
 
   private addHeaders(method: string, options?: any) {

@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
+using Reservation.API.Services;
 
 namespace Reservation.API
 {
@@ -38,6 +39,8 @@ namespace Reservation.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Reservation.API", Version = "v1" });
             });
+
+            services.AddTransient<IContactService, ContactService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

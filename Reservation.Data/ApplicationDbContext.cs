@@ -67,5 +67,7 @@ namespace Reservation.Data
 
 
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Rate> Rates { get; set; }
+        public DbSet<UserFavoriteReservation> UserFavoriteReservations { get; set; }
     }
 }

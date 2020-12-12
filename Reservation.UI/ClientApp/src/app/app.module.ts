@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -14,6 +15,7 @@ import { ReservationsComponent } from './components/reservations/reservations.co
 import { EditReservationComponent } from './components/edit-reservation/edit-reservation.component';
 import { HttpService } from './services/http.service';
 import { NotificationsService, SimpleNotificationsModule } from 'angular2-notifications';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { NotificationsService, SimpleNotificationsModule } from 'angular2-notifi
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    CKEditorModule,
     SimpleNotificationsModule.forRoot({
       timeOut: 5000,
       showProgressBar: true,
@@ -41,9 +44,11 @@ import { NotificationsService, SimpleNotificationsModule } from 'angular2-notifi
     RouterModule.forRoot([
       { path: '', component: ReservationsComponent, pathMatch: 'full' },
       { path: 'create-reservation', component: EditReservationComponent },
+      { path: 'create-reservation/:id', component: EditReservationComponent },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-    ], { relativeLinkResolution: 'legacy' })
+    ], { relativeLinkResolution: 'legacy' }),
+    NgbModule,
   ],
   providers: [HttpService, NotificationsService],
   bootstrap: [AppComponent]

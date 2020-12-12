@@ -1,0 +1,61 @@
+<div class="reservation-list">
+    <div class="reservation-list-header">
+        <div class="row">
+            <div class="col-4">
+                <p>Reservation List</p>
+            </div>
+            <div class="col-5">
+                <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.
+                    Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
+            </div>
+            <div class="col-3">
+                <a href="/create-reservation" class="btn btn-secondary">Create Reservation</a>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-4 pl-0">
+            <select class="form-control form-control-md">
+                <option>Sort By</option>
+                <option *ngFor="let option of sortByOptions" value="option.value">{{option.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div *ngFor="let reservation of reservations" class="row reservation-row">
+                <div class="col-sm-6 col-md-5 vertical-align d-flex contact-info">
+                    <div class="mr-2">
+                        <img src="/assets/img/contactImg.png" />
+                    </div>
+                    <div class="d-block">
+                        <p class="mb-0">{{reservation.name}}</p>
+                        <small>{{reservation.birthDate}}</small>
+                    </div>
+                </div>
+                <div class="d-sm-none d-md-block col-md-2 vertical-align">
+                    <p class="mb-0">Ranking</p>
+                    <div class="rating-stars">
+                        <star-rating [starType]="'svg'" [rating]="2.63"></star-rating>
+                        <ngb-rating [(rate)]="rating.rate" [(max)]="rating.max" readonly="true">
+                            <ng-template #t let-fill="fill">
+                                <span class="star" [class.full]="fill === 100">
+                                    <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                                </span>
+                            </ng-template>
+                        </ngb-rating>
+                    </div>
+
+                </div>
+                <div class="col-sm-3 col-md-3 vertical-align">
+                    <span>Add Favorites</span>
+                    <i class="far fa-heart favorite-icon" (click)="favoriteClick(reservation)"
+                        [class]="{'favorite-icon-red': reservation.isFavorite === true}"></i>
+                </div>
+                <div class="col-sm-3 col-md-2 vertical-align">
+                    <a class="btn btn-secondary" href="{{'/create-reservation/' + reservation.id}}">Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
