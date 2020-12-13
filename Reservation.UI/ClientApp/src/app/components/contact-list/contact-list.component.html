@@ -19,7 +19,8 @@
                 <td>{{ contact.phoneNumber }}</td>
                 <td>{{ contact.birthDate }}</td>
                 <td class="text-right">
-                    <a href="{{'create-contact/' + contact.id}}">Edit</a>
+                    <button (click)="editContact(contact)"><i class="fas fa-edit"></i></button>
+                    <button class="ml-2" (click)="deleteContact(contact, datatableElement)"><i class="fas fa-trash-alt"></i></button>
                 </td>
             </tr>
         </tbody>

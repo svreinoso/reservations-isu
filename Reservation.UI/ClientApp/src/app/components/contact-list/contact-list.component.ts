@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ContactModel } from 'src/app/interfaces/contactModel';
 import { HttpService } from 'src/app/services/http.service';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-contact-list',
@@ -9,6 +10,8 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class ContactListComponent implements OnInit {
 
+  @ViewChild(DataTableDirective, {static: false})
+  private datatableElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
   contacts: ContactModel[];
 
@@ -16,6 +19,20 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadContacts()
+  }
+
+  editContact(contact){
+    location.href = 'create-contact/' + contact.id;
+  }
+
+  deleteContact(contact, datatableElement) {
+    if(confirm('are you sure you want to delete the contact: ' + contact.name)) {
+      this.httpService.delete('Contacts/' + contact.id).subscribe(() => {
+        datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.ajax.reload();
+        });
+      });
+    }
   }
 
   loadContacts() {
@@ -27,7 +44,6 @@ export class ContactListComponent implements OnInit {
       serverSide: true,
       processing: true,
       ajax: (dataTablesParameters: any, callback) => {
-        console.log(dataTablesParameters)
         let url = this.httpService.formatUrl('Contacts', {
           pageSize: dataTablesParameters.length,
           page: dataTablesParameters.start || 1,

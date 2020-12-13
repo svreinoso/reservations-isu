@@ -8,9 +8,6 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ReservationsComponent } from './components/reservations/reservations.component';
 import { EditReservationComponent } from './components/edit-reservation/edit-reservation.component';
 import { HttpService } from './services/http.service';
@@ -25,9 +22,6 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     ReservationsComponent,
     EditReservationComponent,
     ContactListComponent
@@ -56,8 +50,6 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
       { path: 'create-contact', component: EditReservationComponent },
       { path: 'create-contact/:contactId', component: EditReservationComponent },
       { path: 'contact-list', component: ContactListComponent },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
     ], { relativeLinkResolution: 'legacy' }),
     NgbModule,
   ],
