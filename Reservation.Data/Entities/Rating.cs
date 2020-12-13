@@ -6,14 +6,15 @@ using System.Text;
 
 namespace Reservation.Data.Entities
 {
-    public class Rate : ITablesAudit
+    public class Rating : ITablesAudit
     {
         public int Id { get; set; }
         [Required]
-        public int ContactId { get; set; }
+        public int ReservationId { get; set; }
         [Required]
         public int Star { get; set; }
-        public Contact Contact { get; set; }
+        public string UserId { get; set; }
+        public Reservation Reservation { get; set; }
         public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset UpdatedDate { get; set; }
     }

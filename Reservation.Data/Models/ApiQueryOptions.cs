@@ -10,5 +10,6 @@ namespace Reservation.Data.Models
         public int PageSize { get; set; }
         public string Sort { get; set; }
         public string CurrentUser { get; set; }
+        public string Search { get; set; }
     }
 }

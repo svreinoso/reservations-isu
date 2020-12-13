@@ -19,9 +19,9 @@ namespace Reservation.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostContact(UserFavoriteReservation reservation)
+        public async Task<IActionResult> PostContact(FavoriteReservation reservation)
         {
-            _context.UserFavoriteReservations.Add(reservation);
+            _context.FavoriteReservations.Add(reservation);
             await _context.SaveChangesAsync();
             return new OkResult();
         }
@@ -29,10 +29,10 @@ namespace Reservation.API.Controllers
 
         [HttpPost]
         [Route("Remove")]
-        public async Task<IActionResult> Remove(UserFavoriteReservation reservation)
+        public async Task<IActionResult> Remove(FavoriteReservation reservation)
         {
-            var favorite = await _context.UserFavoriteReservations
-                .FirstOrDefaultAsync(x => x.UserId == reservation.UserId && x.ContactId == reservation.ContactId);
+            var favorite = await _context.FavoriteReservations
+                .FirstOrDefaultAsync(x => x.UserId == reservation.UserId && x.ReservationId == reservation.ReservationId);
             if(favorite != null)
             {
                 _context.Remove(favorite);

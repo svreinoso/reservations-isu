@@ -9,25 +9,6 @@
                 width: 40px;
             }
         }
-        .rating-stars {
-            margin-top: -15px;
-            .star {
-                position: relative;
-                display: inline-block;
-                font-size: 2rem;
-                color: #d3d3d3;
-              }
-              .full {
-                color: #faea11;
-              }
-              .half {
-                position: absolute;
-                display: inline-block;
-                overflow: hidden;
-                color: #faea11;
-              }
-    
-        }
         .favorite-icon {
             font-size: 50px;
             &:hover {
@@ -38,4 +19,25 @@
             color: red;
         }
     }
+    
+    .rating-stars {
+        margin-top: -15px;
+        .star {
+            position: relative;
+            display: inline-block;
+            font-size: 2rem;
+            color: #d3d3d3;
+          }
+          .full {
+            color: #faea11;
+          }
+          .half {
+            position: absolute;
+            display: inline-block;
+            overflow: hidden;
+            color: #faea11;
+          }
+
+    }
 }
+

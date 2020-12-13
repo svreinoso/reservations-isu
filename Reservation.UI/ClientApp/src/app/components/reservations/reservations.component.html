@@ -15,9 +15,8 @@
     </div>
     <div class="row mb-3">
         <div class="col-md-4 pl-0">
-            <select class="form-control form-control-md">
-                <option>Sort By</option>
-                <option *ngFor="let option of sortByOptions" value="option.value">{{option.name}}</option>
+            <select class="form-control form-control-md" [(ngModel)]="paginationModel.sort" (change)="loadReservations()">
+                <option *ngFor="let option of sortByOptions" value="{{option.value}}">{{option.name}}</option>
             </select>
         </div>
     </div>
@@ -30,14 +29,13 @@
                     </div>
                     <div class="d-block">
                         <p class="mb-0">{{reservation.name}}</p>
-                        <small>{{reservation.birthDate}}</small>
+                        <small>{{reservation.createdDate}}</small>
                     </div>
                 </div>
                 <div class="d-sm-none d-md-block col-md-2 vertical-align">
                     <p class="mb-0">Ranking</p>
-                    <div class="rating-stars">
-                        <star-rating [starType]="'svg'" [rating]="2.63"></star-rating>
-                        <ngb-rating [(rate)]="rating.rate" [(max)]="rating.max" readonly="true">
+                    <div class="rating-stars" (click)="openModal(content, reservation)">
+                        <ngb-rating [rate]="reservation.rating" [(max)]="rating.max" readonly="true">
                             <ng-template #t let-fill="fill">
                                 <span class="star" [class.full]="fill === 100">
                                     <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
@@ -58,4 +56,26 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-12">
+            <ngb-pagination [collectionSize]="paginationModel.total" [(page)]="paginationModel.page" [maxSize]="5" [rotate]="true"
+                [pageSize]="paginationModel.pageSize" [boundaryLinks]="true" (pageChange)="loadReservations()"></ngb-pagination>
+        </div>
+    </div>
+
+    <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Set Rating</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <ngb-rating [(rate)]="rating.newRating" [(max)]="rating.max"></ngb-rating>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="saveRating()">Save</button>
+        </div>
+      </ng-template>
 </div>

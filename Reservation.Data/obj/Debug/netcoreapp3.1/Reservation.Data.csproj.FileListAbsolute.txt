@@ -3,10 +3,10 @@ C:\Users\Samuel\source\repos\Reservations\Reservation.Data\bin\Debug\netcoreapp3
 C:\Users\Samuel\source\repos\Reservations\Reservation.Data\bin\Debug\netcoreapp3.1\Reservation.Data.runtimeconfig.dev.json
 C:\Users\Samuel\source\repos\Reservations\Reservation.Data\bin\Debug\netcoreapp3.1\Reservation.Data.dll
 C:\Users\Samuel\source\repos\Reservations\Reservation.Data\bin\Debug\netcoreapp3.1\Reservation.Data.pdb
-C:\Users\Samuel\source\repos\Reservations\Reservation.Data\obj\Debug\netcoreapp3.1\Reservation.Data.csprojAssemblyReference.cache
 C:\Users\Samuel\source\repos\Reservations\Reservation.Data\obj\Debug\netcoreapp3.1\Reservation.Data.AssemblyInfoInputs.cache
 C:\Users\Samuel\source\repos\Reservations\Reservation.Data\obj\Debug\netcoreapp3.1\Reservation.Data.AssemblyInfo.cs
 C:\Users\Samuel\source\repos\Reservations\Reservation.Data\obj\Debug\netcoreapp3.1\Reservation.Data.csproj.CoreCompileInputs.cache
 C:\Users\Samuel\source\repos\Reservations\Reservation.Data\obj\Debug\netcoreapp3.1\Reservation.Data.dll
 C:\Users\Samuel\source\repos\Reservations\Reservation.Data\obj\Debug\netcoreapp3.1\Reservation.Data.pdb
 C:\Users\Samuel\source\repos\Reservations\Reservation.Data\obj\Debug\netcoreapp3.1\Reservation.Data.genruntimeconfig.cache
+C:\Users\Samuel\source\repos\Reservations\Reservation.Data\obj\Debug\netcoreapp3.1\Reservation.Data.csprojAssemblyReference.cache

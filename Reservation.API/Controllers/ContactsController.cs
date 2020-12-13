@@ -29,7 +29,7 @@ namespace Reservation.API.Controllers
         [HttpGet]
         public async Task<ActionResult> GetContacts([FromQuery] ApiQueryOptions option)
         {
-            ApiResult result = await _contactService.GetReservations(option);
+            ApiResult result = await _contactService.GetContacts(option);
             return new OkObjectResult(result);
         }
 
@@ -44,6 +44,14 @@ namespace Reservation.API.Controllers
                 return NotFound();
             }
 
+            return contact;
+        }
+
+        // GET: api/Contacts/GetByName
+        [HttpGet("GetByName/{name}")]
+        public async Task<ActionResult<Contact>> GetByName(string name)
+        {
+            var contact = await _context.Contacts.FirstOrDefaultAsync(x => x.Name == name);
             return contact;
         }
 
@@ -79,12 +87,10 @@ namespace Reservation.API.Controllers
 
         // POST: api/Contacts
         [HttpPost]
-        public async Task<ActionResult<Contact>> PostContact(Contact contact)
+        public async Task<IActionResult> PostContact(ContactDto contact)
         {
-            _context.Contacts.Add(contact);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetContact", new { id = contact.Id }, contact);
+            var result = await _contactService.AddContact(contact);
+            return result;
         }
 
         // DELETE: api/Contacts/5

@@ -16,13 +16,31 @@ code {
 }
 
 .invalid-form-control{
-  border: 2px solid red;
+  border: 2px solid red !important;
 }
 
 .vertical-align {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/*
+   server-side-angular-way.component.css
+*/
+.no-data-available {
+  text-align: center;
+}
+
+/*
+   src/styles.css (i.e. your global style)
+*/
+.dataTables_empty {
+  display: none;
+}
+
+body > ngb-modal-window > div > div > div.modal-body > ngb-rating{
+  font-size: 40px;;
 }
 
 /* Importing Bootstrap SCSS file. */

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ContactModel } from 'src/app/interfaces/contactModel';
 import { HttpService } from 'src/app/services/http.service';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-reservations',
@@ -20,39 +22,44 @@ export class ReservationsComponent implements OnInit {
   ];
   paginationModel = {
     page: 1,
-    pageSize: 10,
-    currentUser: ''
+    pageSize: 5,
+    currentUser: '',
+    sort: 1,
+    total: 0
   };
   reservations: ContactModel[];
   faHeart = faHeart;
   rating = {
-    rate: 2.6,
-    max: 5
+    rate: 0,
+    max: 5,
+    newRating: 0
   };
+  reservation: any;
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, private modalService: NgbModal,
+    private notificationService: NotificationsService) { }
 
   ngOnInit(): void {
     this.paginationModel.currentUser = localStorage.getItem('userId');
-    if(!this.paginationModel.currentUser) {
-      this.paginationModel.currentUser = new Date().getTime().toString();
-      localStorage.setItem('userId', this.paginationModel.currentUser)
-    }
     this.loadReservations();
   }
 
+  getRating() {
+    return Math.floor(Math.random() * Math.floor(5));
+  }
+
   loadReservations(){
-    let url = this.httpService.formatUrl('Contacts', this.paginationModel);
+    let url = this.httpService.formatUrl('reservations', this.paginationModel);
     this.httpService.get(url).subscribe((result: any) => {
-      console.log(result)
       this.reservations = result.data;
+      this.paginationModel.total = result.total;
     });
   }
 
   favoriteClick(reservation) {
     let model = {
-      contactId: reservation.id,
-      userId: reservation.userId
+      reservationId: reservation.id,
+      userId: this.httpService.getUserId()
     }
 
     let url = reservation.isFavorite ? 'Favorite/remove' : 'Favorite';
@@ -63,6 +70,31 @@ export class ReservationsComponent implements OnInit {
 
   editReservation(model: ContactModel) {
     console.log(model.birthDate)
+  }
+
+  openModal(content, reservation) {
+    this.rating.newRating = 0;
+    this.reservation = reservation;
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    }, (reason) => {
+    });
+  }
+
+  saveRating(content) {
+    if(this.rating.newRating === 0) {
+      this.notificationService.error('Error', 'Please select rating.', {position: ['top', 'right']}, {position: ['top', 'right']});
+      return;
+    }
+
+    var model = {
+      reservationId: this.reservation.id,
+      star: this.rating.newRating,
+      userId: this.httpService.getUserId()
+    }
+    this.httpService.post('Rating', model).subscribe(() => {
+      this.loadReservations();
+      this.modalService.dismissAll('');
+    })
   }
 
 }

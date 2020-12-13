@@ -9,5 +9,6 @@ namespace Reservation.Data.Models
         public int Page { get; set; }
         public int Pages { get; set; }
         public object Data { get; set; }
+        public int Total { get; set; }
     }
 }

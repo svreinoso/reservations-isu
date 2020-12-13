@@ -16,6 +16,10 @@ import { EditReservationComponent } from './components/edit-reservation/edit-res
 import { HttpService } from './services/http.service';
 import { NotificationsService, SimpleNotificationsModule } from 'angular2-notifications';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ContactListComponent } from './components/contact-list/contact-list.component';
+import { DataTablesModule } from 'angular-datatables';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 @NgModule({
   declarations: [
@@ -25,16 +29,20 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CounterComponent,
     FetchDataComponent,
     ReservationsComponent,
-    EditReservationComponent
+    EditReservationComponent,
+    ContactListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     CKEditorModule,
+    DataTablesModule,
+    LoadingBarHttpClientModule,
     SimpleNotificationsModule.forRoot({
-      timeOut: 5000,
+      timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,
       clickToClose: false,
@@ -44,7 +52,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RouterModule.forRoot([
       { path: '', component: ReservationsComponent, pathMatch: 'full' },
       { path: 'create-reservation', component: EditReservationComponent },
-      { path: 'create-reservation/:id', component: EditReservationComponent },
+      { path: 'create-reservation/:reservationId', component: EditReservationComponent },
+      { path: 'create-contact', component: EditReservationComponent },
+      { path: 'create-contact/:contactId', component: EditReservationComponent },
+      { path: 'contact-list', component: ContactListComponent },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
     ], { relativeLinkResolution: 'legacy' }),

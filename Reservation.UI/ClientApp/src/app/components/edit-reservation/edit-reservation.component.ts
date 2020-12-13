@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { NotificationsService } from 'angular2-notifications';
 import { ContactModel } from 'src/app/interfaces/contactModel';
 import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-edit-reservation',
   templateUrl: './edit-reservation.component.html',
-  styleUrls: ['./edit-reservation.component.css']
+  styleUrls: ['./edit-reservation.component.scss']
 })
 export class EditReservationComponent implements OnInit {
 
@@ -24,14 +25,25 @@ export class EditReservationComponent implements OnInit {
     { name: 'Office', value: 2 },
     { name: 'Mobile', value: 3 }
   ];
+  timer: any;
+  reservationId: 0;
+  contactId: 0;
 
-  constructor(private fb: FormBuilder, private httpService: HttpService, private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private httpService: HttpService, private route: ActivatedRoute,
+    private notificationService: NotificationsService) { }
 
   ngOnInit(): void {
     this.loadForm();
     this.route.params.subscribe(params => {
-      if(params && params.id && params.id > 0) {
-        this.httpService.get('Contacts/' + params.id).subscribe((response: any) => {
+      this.reservationId = params['reservationId'];
+      if(this.reservationId && this.reservationId > 0) {
+        this.httpService.get('Reservations/' + this.reservationId).subscribe((response: any) => {
+          this.editReservation(response);
+        });
+      } 
+      this.contactId = params['contactId'];
+      if(this.contactId && this.contactId > 0) {
+        this.httpService.get('Contacts/' + this.contactId).subscribe((response: any) => {
           this.editReservation(response);
         });
       }
@@ -75,8 +87,8 @@ export class EditReservationComponent implements OnInit {
     this.contactForm = this.fb.group({
       id: new FormControl(0),
       name: new FormControl('', Validators.required),
-      phoneNumber: new FormControl('', [Validators.required]),
-      contactType: new FormControl(0, [Validators.required]),
+      phoneNumber: new FormControl(''),
+      contactType: new FormControl(0, [Validators.required, Validators.min(1)]),
       birthdate: new FormControl('', [Validators.required]),
       editorData: new FormControl('')
     });
@@ -88,9 +100,24 @@ export class EditReservationComponent implements OnInit {
       name: model.name,
       phoneNumber: model.phoneNumber,
       contactType: model.contactType,
-      birthdate: model.birthDate,
-      editorData: model.editorData
+      birthdate: model.birthDate ? model.birthDate.toString().substr(0, 10) : '',
+      editorData: model.editorData || ''
     });
+  }
+
+  onKeyUp(event) {
+    let value = event.target.value;
+    if (!value) return;
+
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.httpService.get('Contacts/GetByName/' + value)
+      .subscribe((response: any) => {
+        if(response && response.name) {
+          this.editReservation(response);
+        }
+      });
+    }, 1000);
   }
 
   onSubmit() {
@@ -101,26 +128,12 @@ export class EditReservationComponent implements OnInit {
     }
 
     let data = this.contactForm.value;
-
-    let userId = localStorage.getItem('userId');
-    if(!userId) {
-      userId = new Date().getTime().toString();
-      localStorage.setItem('userId', userId)
-    }
-
-    data.userId = userId;
-    if(data.id) {
-
-      this.httpService.update('contacts/' + data.id, data).subscribe(() => {
-        location.href = '/';
-      });
-    } else {
-      
-      this.httpService.post('contacts', data).subscribe(() => {
-        location.href = '/';
-      });
-    }
-
+    data.reservationId = this.reservationId;
+    data.userId = this.httpService.getUserId();
+    this.httpService.post('contacts', data).subscribe(() => {
+      this.notificationService.success('Saved.')
+      location.href = '/';
+    });
   }
 
   markFormGroupTouched(formGroup: FormGroup) {
@@ -138,5 +151,7 @@ export class EditReservationComponent implements OnInit {
   }
 
   get name() { return this.contactForm.get('name'); }
+  get contactType() { return this.contactForm.get('contactType'); }
+  get birthdate() { return this.contactForm.get('birthdate'); }
 
 }

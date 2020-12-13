@@ -65,9 +65,10 @@ namespace Reservation.Data
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
-
         public DbSet<Contact> Contacts { get; set; }
-        public DbSet<Rate> Rates { get; set; }
-        public DbSet<UserFavoriteReservation> UserFavoriteReservations { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<FavoriteReservation> FavoriteReservations { get; set; }
+        public DbSet<Entities.Reservation> Reservations { get; set; }
     }
 }

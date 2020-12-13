@@ -1,0 +1,19 @@
+.edit-contact {
+    input, select {
+        height: 40px;
+    }
+    .row {
+        margin-bottom: 20px;
+    }
+    .form-group {
+        input, select {
+            padding-left: 35px;
+        }
+        i{
+            position: absolute;
+            left: 25px;
+            top: 10px;
+            font-size: 24px;
+        }
+    }
+}

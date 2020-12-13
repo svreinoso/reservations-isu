@@ -34,6 +34,15 @@ export class HttpService {
       .pipe(catchError(err => this.handleError(err)));
   }
 
+  getUserId() {
+    let userId = localStorage.getItem('userId');
+    if(!userId) {
+      userId = new Date().getTime().toString();
+      localStorage.setItem('userId', userId)
+    }
+    return userId;
+  }
+
   get(url: string, options?: any) {
     return this.http.get(this.baseUrl + url, this.addHeaders('GET', options))
       .pipe(catchError(err => this.handleError(err)));
@@ -63,11 +72,11 @@ export class HttpService {
     return options;
   }
 
-  private handleError(error: any) {
-    console.log(error);
-    if (error && error._body) {
+  private handleError(response: any) {
+    console.log(response);
+    if (response && response._body) {
       try {
-        const jsonError = JSON.parse(error._body);
+        const jsonError = JSON.parse(response._body);
         if (jsonError && jsonError.error) {
           this.notificationService.error('Error', jsonError.error);
         } else if (jsonError && jsonError.message) {
@@ -79,13 +88,28 @@ export class HttpService {
       }
     }
 
-    switch (error.status) {
+    if(response.error){
+      if(response.error.errors) {
+        let keys = Object.keys(response.error.errors);
+        let message = '';
+        for(var i = 0; i < keys.length; i++) {
+          message = response.error.errors[keys[i]].join(', ')
+        }
+        this.notificationService.error('Error', message)
+        console.log(message)
+      }
+    }
+
+    switch (response.status) {
       case 401:
         console.log('unauthorize')
         break;
+      case 500:
+        this.notificationService.error('Error Interno');
+        break
       default:
         break;
     }
-    return throwError(error._body);
+    return throwError(response._body);
   }
 }
