@@ -41,3 +41,45 @@
     }
 }
 
+@media only screen and (min-width: 600px) and (max-width: 1000px) {
+    .contact-info {
+        width: 40%;
+    }
+    .reservation-favorite {
+        padding: 0;
+        span {
+            display: none;
+        }
+        width: 15%;
+    }
+    .reservation-edit {
+        padding: 0;
+        width: 15%;
+    }
+    .reservation-rating {
+        width: 20%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .reservation-list {
+        .reservation-rating, .reservation-list-header, .reservation-favorite span {
+            display: none !important;
+        }
+        .contact-info {
+            width: 60%;
+        }
+        .reservation-favorite {
+            width: 20%;
+        }
+        .reservation-edit {
+            width: 20%;
+        }
+        .filter-row {
+            margin-bottom: 15px;
+            div{
+                padding: 0 15px !important;
+            }
+        }
+    }
+}

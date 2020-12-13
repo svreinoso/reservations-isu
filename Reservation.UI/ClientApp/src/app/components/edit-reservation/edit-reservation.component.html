@@ -1,10 +1,26 @@
 <div class="edit-contact">
+    
+    <div class="reservation-edit-header">
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <h3 class="text-danger">Create Reservation</h3>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.
+                    Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
+            </div>
+            <div class="col-md-4 go-to-list">
+                <a href="/" class="btn btn-secondary">Reservation List</a>
+            </div>
+        </div>
+    </div>
+
     <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
         <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <input [class]="{'invalid-form-control': name.invalid && (name.dirty || name.touched)}" type="text"
-                        name="name" formControlName="name" placeholder="Contact Name" (keyup)="onKeyUp($event)" >
+                        name="name" formControlName="name" placeholder="Contact Name" (keyup)="onKeyUp($event)">
                     <i class="far fa-user"></i>
                 </div>
                 <div>
@@ -31,7 +47,7 @@
             <div class="col-sm-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <input type="text" name="phoneNumber" formControlName="phoneNumber" placeholder="Phone">
-                    <i class="fas fa-phone-alt"></i>
+                    <i class="fas fa-phone"></i>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-3">

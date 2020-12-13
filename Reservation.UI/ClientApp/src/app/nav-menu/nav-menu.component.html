@@ -1,44 +1,23 @@
 <header>
-  <nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
-  >
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">Reservation.UI</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
-        [ngClass]="{ show: isExpanded }"
-      >
-        <ul class="navbar-nav flex-grow">
-          <li
-            class="nav-item"
-            [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/counter']"
-              >Counter</a
-            >
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
-              >Fetch data</a
-            >
-          </li>
-        </ul>
+  <div class="header-img">
+    <div class="container d-flex">
+      <div class="title-container">
+        <p class="title"><b>ISU</b>Corp</p>
+      </div>
+      <div class="sub-title ml-3" >
+        <p i18n="@@subTitle1">World Class</p>
+        <p i18n="@@subTitle2">Software Development</p>
+      </div>
+      <div class="mobile-menu">
+        <a *ngIf="isReservationList" href="/create-reservation">
+          <i class="fas fa-chevron-left"></i> 
+          <span>Create Reservation</span>
+        </a>
+        <a *ngIf="!isReservationList" href="/">
+          <span>Reservation List</span>
+          <i class="fas fa-chevron-right"></i> 
+        </a>
       </div>
     </div>
-  </nav>
+  </div>
 </header>

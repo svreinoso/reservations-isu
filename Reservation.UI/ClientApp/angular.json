@@ -13,6 +13,12 @@
           "styleext": "scss"
         }
       },
+      "i18n": {
+        "sourceLocale": "es-ES",
+        "locales": {
+          "es": "src/locale/messages.es.xlf"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -59,6 +65,9 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
+            },
+            "es": {
+              "localize": ["es"]
             }
           }
         },
@@ -70,6 +79,9 @@
           "configurations": {
             "production": {
               "browserTarget": "Reservation.UI:build:production"
+            },
+            "es": {
+              "browserTarget": "Reservation.UI:build:es"
             }
           }
         },
