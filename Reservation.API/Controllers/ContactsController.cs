@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Reservation.API.Services;
+using Reservation.BL.Services;
 using Reservation.Data;
 using Reservation.Data.Entities;
 using Reservation.Data.Models;
@@ -89,8 +86,8 @@ namespace Reservation.API.Controllers
         [HttpPost]
         public async Task<IActionResult> PostContact(ContactDto contact)
         {
-            var result = await _contactService.AddContact(contact);
-            return result;
+            await _contactService.AddContact(contact);
+            return new OkResult();
         }
 
         // DELETE: api/Contacts/5

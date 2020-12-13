@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Reservation.BL\Reservation.BL.csproj" />
     <ProjectReference Include="..\Reservation.Data\Reservation.Data.csproj" />
   </ItemGroup>
 

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Reservation.API.Services;
+using Reservation.BL.Services;
 using Reservation.Data;
 using Reservation.Data.Models;
 

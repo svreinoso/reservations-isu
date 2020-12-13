@@ -160,3 +160,5 @@ C:\Users\Samuel\source\repos\Reservations\Reservation.API\bin\Debug\net5.0\runti
 C:\Users\Samuel\source\repos\Reservations\Reservation.API\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\Samuel\source\repos\Reservations\Reservation.API\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Samuel\source\repos\Reservations\Reservation.API\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\Samuel\source\repos\Reservations\Reservation.API\bin\Debug\net5.0\Reservation.BL.dll
+C:\Users\Samuel\source\repos\Reservations\Reservation.API\bin\Debug\net5.0\Reservation.BL.pdb
