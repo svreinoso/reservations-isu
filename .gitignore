@@ -3,6 +3,7 @@ Reservation.API/appsettings.production.json
 Reservation.API/report.xlsx
 Reservation.API/report.csv
 Reservation.API/Properties/ServiceDependencies/
+Reservation.API/Properties/PublishProfiles/
 
 Reservation.API/bin/*
 Reservation.API/obj/*
