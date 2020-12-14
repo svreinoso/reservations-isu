@@ -2,6 +2,7 @@
 using Reservation.Data;
 using Reservation.Data.Entities;
 using Reservation.Data.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,9 +23,15 @@ namespace Reservation.BL.Services
             _context = context;
         }
 
+        /// <summary>
+        /// Add or Edit Contact or Reservation
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public async Task<ApiResult> AddContact(ContactDto dto)
         {
             var contact = await _context.Contacts.FirstOrDefaultAsync(x => x.Name == dto.Name);
+            //If the name does not exist, create the contact
             if(contact == null)
             {
                 contact = new Contact
@@ -38,7 +45,7 @@ namespace Reservation.BL.Services
                 await _context.SaveChangesAsync();
             } else
             {
-                //if the contact is edited
+                //if the contact exist, check if there are changes to edit
                 if(contact.Name != dto.Name ||
                     contact.BirthDate != dto.BirthDate ||
                     contact.PhoneNumber != dto.PhoneNumber ||
@@ -53,6 +60,7 @@ namespace Reservation.BL.Services
                 }
             }
 
+            //If the reservation exist check if has changes and update it
             if(dto.ReservationId > 0)
             {
                 var reservation = await _context.Reservations.FirstOrDefaultAsync(x => x.Id == dto.ReservationId);
@@ -78,6 +86,11 @@ namespace Reservation.BL.Services
             return new ApiResult();
         }
 
+        /// <summary>
+        /// Get Contacts filteres, ordered and paginated
+        /// </summary>
+        /// <param name="option"></param>
+        /// <returns></returns>
         public async Task<ApiResult> GetContacts(ApiQueryOptions option)
         {
             var query = string.IsNullOrEmpty(option.Search)
@@ -118,7 +131,7 @@ namespace Reservation.BL.Services
             return new ApiResult
             {
                 Page = option.Page,
-                Pages = count / option.Page,
+                Pages = (int)Math.Ceiling(count / (decimal)option.PageSize),
                 Total = count,
                 Data = data
             };

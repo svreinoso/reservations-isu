@@ -17,7 +17,6 @@ namespace Reservation.Data
 
         }
 
-
         private void UpdateAuditEntities()
         {
             var modifiedEntries = ChangeTracker.Entries()

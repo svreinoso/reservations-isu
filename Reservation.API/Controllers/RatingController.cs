@@ -13,11 +13,20 @@ namespace Reservation.API.Controllers
 
         private readonly ApplicationDbContext _context;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="context"></param>
         public RatingController(ApplicationDbContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// Add new rating and update the value for the reservation
+        /// </summary>
+        /// <param name="rating"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> PostContact(Rating rating)
         {

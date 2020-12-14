@@ -12,20 +12,33 @@ namespace Reservation.API.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="context"></param>
         public FavoriteController(ApplicationDbContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// Add Reservation to favorite
+        /// </summary>
+        /// <param name="favorite"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> PostContact(FavoriteReservation reservation)
+        public async Task<IActionResult> Post(FavoriteReservation favorite)
         {
-            _context.FavoriteReservations.Add(reservation);
+            _context.FavoriteReservations.Add(favorite);
             await _context.SaveChangesAsync();
             return new OkResult();
         }
 
-
+        /// <summary>
+        /// Remove from favorite
+        /// </summary>
+        /// <param name="reservation"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Remove")]
         public async Task<IActionResult> Remove(FavoriteReservation reservation)

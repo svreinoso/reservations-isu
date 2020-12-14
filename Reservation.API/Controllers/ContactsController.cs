@@ -16,13 +16,22 @@ namespace Reservation.API.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IContactService _contactService;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="contactService"></param>
         public ContactsController(ApplicationDbContext context, IContactService contactService)
         {
             _context = context;
             _contactService = contactService;
         }
 
-        // GET: api/Contacts
+        /// <summary>
+        /// Get Contacts filtered and with pagination
+        /// </summary>
+        /// <param name="option"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult> GetContacts([FromQuery] ApiQueryOptions option)
         {
@@ -30,7 +39,11 @@ namespace Reservation.API.Controllers
             return new OkObjectResult(result);
         }
 
-        // GET: api/Contacts/5
+        /// <summary>
+        /// Get Contact by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Contact>> GetContact(int id)
         {
@@ -44,7 +57,11 @@ namespace Reservation.API.Controllers
             return contact;
         }
 
-        // GET: api/Contacts/GetByName
+        /// <summary>
+        /// Get a Contact by name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpGet("GetByName/{name}")]
         public async Task<ActionResult<Contact>> GetByName(string name)
         {
@@ -52,37 +69,11 @@ namespace Reservation.API.Controllers
             return contact;
         }
 
-        // PUT: api/Contacts/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutContact(int id, Contact contact)
-        {
-            if (id != contact.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(contact).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ContactExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Contacts
+        /// <summary>
+        /// Add or edit Contact or reservations
+        /// </summary>
+        /// <param name="contact"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> PostContact(ContactDto contact)
         {
@@ -90,7 +81,11 @@ namespace Reservation.API.Controllers
             return new OkResult();
         }
 
-        // DELETE: api/Contacts/5
+        /// <summary>
+        /// Delete a contact
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteContact(int id)
         {

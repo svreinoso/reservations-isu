@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reservation.UI", "Reservati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservation.BL", "Reservation.BL\Reservation.BL.csproj", "{1EE92E31-BE24-4262-9202-D0D1DAFD651F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservation.Test", "Reservation.Test\Reservation.Test.csproj", "{F3A90062-D187-414D-B156-99850654CE94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{1EE92E31-BE24-4262-9202-D0D1DAFD651F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EE92E31-BE24-4262-9202-D0D1DAFD651F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EE92E31-BE24-4262-9202-D0D1DAFD651F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3A90062-D187-414D-B156-99850654CE94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3A90062-D187-414D-B156-99850654CE94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3A90062-D187-414D-B156-99850654CE94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3A90062-D187-414D-B156-99850654CE94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
