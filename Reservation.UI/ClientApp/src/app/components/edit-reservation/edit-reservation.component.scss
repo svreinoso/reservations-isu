@@ -1,0 +1,33 @@
+.edit-contact {
+    input, select {
+        height: 40px;
+        width: 100%;
+    }
+    .row {
+        margin-bottom: 20px;
+    }
+    .form-group {
+        margin-bottom: 0;
+        margin-top: 1rem;
+        input, select {
+            padding-left: 35px;
+        }
+        i{
+            position: absolute;
+            left: 25px;
+            top: 24px;
+            font-size: 24px;
+        }
+    }
+    
+    @media only screen and (max-width: 600px) {
+        input, select{
+            width: 100%;
+        }
+        .reservation-edit-header {
+            .go-to-list {
+                display: none;
+            }
+        }
+    }
+}

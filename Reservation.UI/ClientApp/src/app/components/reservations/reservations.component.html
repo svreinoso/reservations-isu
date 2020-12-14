@@ -1,0 +1,81 @@
+<div class="reservation-list">
+    <div class="reservation-list-header">
+        <div class="row">
+            <div class="col-4">
+                <h3 class="text-danger">Reservation List</h3>
+            </div>
+            <div class="col-5">
+                <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.
+                    Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
+            </div>
+            <div class="col-3">
+                <a href="/create-reservation" class="btn btn-secondary">Create Reservation</a>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3 filter-row">
+        <div class="col-md-4 pl-0">
+            <select class="form-control form-control-md" [(ngModel)]="paginationModel.sort" (change)="loadReservations()">
+                <option *ngFor="let option of sortByOptions" value="{{option.value}}">{{option.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div *ngFor="let reservation of reservations" class="row reservation-row">
+                <div class="col-sm-5 col-md-5 vertical-align d-flex contact-info pl-1 pr-0">
+                    <div class="mr-2">
+                        <img src="/assets/img/contactImg.png" />
+                    </div>
+                    <div class="d-block">
+                        <p class="mb-0">{{reservation.name}}</p>
+                        <small>{{reservation.createdDate | date : 'EEEE MMM d, h:mm a'}}</small>
+                    </div>
+                </div>
+                <div class="col-sm-3 vertical-align reservation-rating d-block">
+                    <p class="mb-0">Ranking</p>
+                    <div class="rating-stars" (click)="openModal(content, reservation)">
+                        <ngb-rating [rate]="reservation.rating" [(max)]="rating.max" readonly="true">
+                            <ng-template #t let-fill="fill">
+                                <span class="star" [class.full]="fill === 100">
+                                    <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                                </span>
+                            </ng-template>
+                        </ngb-rating>
+                    </div>
+
+                </div>
+                <div class="col-sm-2 col-md-3 vertical-align reservation-favorite">
+                    <span>Add Favorites</span>
+                    <i class="far fa-heart favorite-icon" (click)="favoriteClick(reservation)"
+                        [class]="{'favorite-icon-red': reservation.isFavorite === true}"></i>
+                </div>
+                <div class="col-sm-2 col-md-1 vertical-align reservation-edit">
+                    <a class="btn btn-secondary" href="{{'/create-reservation/' + reservation.id}}">Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <ngb-pagination [collectionSize]="paginationModel.total" [(page)]="paginationModel.page" [maxSize]="5" [rotate]="true"
+                [pageSize]="paginationModel.pageSize" [boundaryLinks]="true" (pageChange)="loadReservations()"></ngb-pagination>
+        </div>
+    </div>
+
+    <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Set Rating</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <ngb-rating [(rate)]="rating.newRating" [(max)]="rating.max"></ngb-rating>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="saveRating(content)">Save</button>
+        </div>
+    </ng-template>
+</div>

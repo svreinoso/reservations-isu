@@ -1,0 +1,85 @@
+.reservation-list {
+    .reservation-row {
+        background-color: #f2f2f2;
+        margin-bottom: 10px;
+        padding: 10px;
+        .contact-info {
+            justify-content: end;
+            img {
+                width: 40px;
+            }
+        }
+        .favorite-icon {
+            font-size: 50px;
+            &:hover {
+                background-color: red;
+            }
+        }
+        .favorite-icon-red {
+            color: red;
+        }
+    }
+    
+    .rating-stars {
+        margin-top: -15px;
+        .star {
+            position: relative;
+            display: inline-block;
+            font-size: 2rem;
+            color: #d3d3d3;
+          }
+          .full {
+            color: #faea11;
+          }
+          .half {
+            position: absolute;
+            display: inline-block;
+            overflow: hidden;
+            color: #faea11;
+          }
+
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1000px) {
+    .contact-info {
+        width: 40%;
+    }
+    .reservation-favorite {
+        padding: 0;
+        span {
+            display: none;
+        }
+        width: 15%;
+    }
+    .reservation-edit {
+        padding: 0;
+        width: 15%;
+    }
+    .reservation-rating {
+        width: 20%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .reservation-list {
+        .reservation-rating, .reservation-list-header, .reservation-favorite span {
+            display: none !important;
+        }
+        .contact-info {
+            width: 60%;
+        }
+        .reservation-favorite {
+            width: 20%;
+        }
+        .reservation-edit {
+            width: 20%;
+        }
+        .filter-row {
+            margin-bottom: 15px;
+            div{
+                padding: 0 15px !important;
+            }
+        }
+    }
+}

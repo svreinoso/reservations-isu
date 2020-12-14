@@ -1,0 +1,23 @@
+<header>
+  <div class="header-img">
+    <div class="container d-flex">
+      <div class="title-container">
+        <p class="title"><b>ISU</b>Corp</p>
+      </div>
+      <div class="sub-title ml-3" >
+        <p i18n="@@subTitle1">World Class</p>
+        <p i18n="@@subTitle2">Software Development</p>
+      </div>
+      <div class="mobile-menu">
+        <a *ngIf="isReservationList" href="/create-reservation">
+          <i class="fas fa-chevron-left"></i> 
+          <span>Create Reservation</span>
+        </a>
+        <a *ngIf="!isReservationList" href="/">
+          <span>Reservation List</span>
+          <i class="fas fa-chevron-right"></i> 
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
