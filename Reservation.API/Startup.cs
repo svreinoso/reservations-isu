@@ -4,9 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Reservation.BL.Services;
 using Reservation.Data;
+using System;
 
 namespace Reservation.API
 {
@@ -37,10 +39,18 @@ namespace Reservation.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context, ILogger<Startup> logger)
         {
-            context.Database.Migrate();
-            context.Database.EnsureCreated();
+            try
+            {
+                context.Database.Migrate();
+                context.Database.EnsureCreated();
+                logger.LogInformation("Data base configured");
+            } catch (Exception ex)
+            {
+                logger.LogError("Error configurin db: " + ex.Message);
+            }
+
 
             if (env.IsDevelopment())
             {
@@ -50,13 +60,13 @@ namespace Reservation.API
             }
             
             app.UseCors(builder => {
-                builder.WithOrigins("http://localhost:4200");
+                builder.WithOrigins("http://localhost:4200, https://localhost:44316/");
                 builder.AllowAnyHeader();
                 builder.AllowAnyMethod();
                 builder.AllowAnyOrigin();
             });
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

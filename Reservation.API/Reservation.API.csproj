@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>09836d0e-7cce-4d85-9184-359335015238</UserSecretsId>
+    <StartupObject>Reservation.API.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
