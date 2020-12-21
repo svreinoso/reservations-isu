@@ -16,7 +16,12 @@ namespace Reservation.API.Migrations
                 -- Create date: 2020-12-12
                 -- Description:	Insert new rating and update the rating in the reservation
                 -- =============================================
-                CREATE OR ALTER PROCEDURE SP_UpdateRating @stars decimal, @reservationId int, @userId varchar(20)  
+				
+                IF OBJECT_ID ( 'SP_UpdateRating', 'P' ) IS NOT NULL   
+	                DROP PROCEDURE SP_UpdateRating;  
+                GO 
+
+                CREATE PROCEDURE SP_UpdateRating @stars decimal, @reservationId int, @userId varchar(20)  
                 AS
                 BEGIN
 	                INSERT INTO Ratings VALUES (@reservationId, @stars, @userId, GETDATE(), GETDATE())

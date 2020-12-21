@@ -2,9 +2,9 @@
 
 - Demo video in https://youtu.be/YWpkZlFkKGg 
 
-- Project created with ASP.NET Core 5.0 with Entity Framework Core Code-First pattern and Sql Server.
+- Project created with ASP.NET Core 5.0 with Entity Framework Core Code-First pattern and Sql Server 2014 and later.
 
-- Angular 11 in the front end, some libraries like bootstrap, angular material, datatables.net and others.
+- Angular 11 in the front end, require node v12 and later, some libraries like bootstrap, angular material, datatables.net and others.
 
 - An User can add, edit or delete contacts and or reservations, add to favorite and add new rating.
 
